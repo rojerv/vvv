@@ -1,0 +1,26 @@
+version: "3.6"
+services:
+
+  client:
+    container_name: vvv_client
+    image: node:14-alpine
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./client:/app
+    ports:
+      - 3000:3000
+    environment:
+      - HOST=0.0.0.0
+
+  server:
+    container_name: vvv_server
+    image: node:14-alpine
+    command: npm start
+    working_dir: /app
+    volumes:
+      - ./server:/app
+    ports:
+      - 4000:3000
+    environment:
+      - NODE_ENV=development
