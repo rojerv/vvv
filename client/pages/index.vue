@@ -1,12 +1,12 @@
-<template>
-  <div>
-    index
-  </div>
+<template lang="pug">
+div index
 </template>
 
 <script>
 export default {}
 </script>
 
-<style>
+<style lang="stylus">
+div
+  color red
 </style>
