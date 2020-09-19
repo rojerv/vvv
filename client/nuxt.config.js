@@ -1,7 +1,7 @@
 const { API_ENDPOINT, PREFIX } = process.env
 
 export default {
-  mode: 'spa',
+  ssr: false,
   head: {
     title: 'VVV',
     meta: [
@@ -45,7 +45,7 @@ export default {
     }
   },
   axios: {
-    baseURL: `${API_ENDPOINT}${PREFIX}`,
+    baseURL: API_ENDPOINT ? `${API_ENDPOINT}${PREFIX}` : 'http://localhost:4000/api/v1',
     credentials: true
   },
   styleResources: {
