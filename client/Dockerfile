@@ -1,0 +1,20 @@
+FROM node:14-alpine
+
+ARG HOST
+ARG API_ENDPOINT
+ARG PREFIX
+
+ENV NODE_ENV $HOST
+ENV API_ENDPOINT $API_ENDPOINT
+ENV PREFIX $PREFIX
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD [ "npm", "start" ]

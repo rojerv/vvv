@@ -3,29 +3,23 @@ services:
 
   client:
     container_name: vvv_client
-    image: node:14-alpine
-    command: npm run dev
-    working_dir: /app
-    volumes:
-      - ./client:/app
-    ports:
-      - 3000:3000
+    restart: always
+    build:
+      context: ./client
     environment:
       - HOST=0.0.0.0
       - API_ENDPOINT
       - PREFIX
+    ports:
+      - 3000:3000
 
   server:
     container_name: vvv_server
-    image: node:14-alpine
-    command: npm start
-    working_dir: /app
-    volumes:
-      - ./server:/app
-    ports:
-      - 4000:3000
+    restart: always
+    build:
+      context: ./server
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
@@ -34,6 +28,8 @@ services:
       - JWT_EXP_DAYS
       - JWT
       - PREFIX
+    ports:
+      - 4000:3000
     depends_on:
       - db
 
